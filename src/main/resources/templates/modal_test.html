@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="Modal"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>
+    .circ{
+      width: 200px;
+      height: 100px;
+      background-color: #FBEDC9;
+      border-top-left-radius: 110px;
+      border-top-right-radius: 110px;
+      position: fixed;
+      bottom: -30px;
+      left: 40px;
+    }
+
+    .circ2{
+      width: 400px;
+      height: 200px;
+      background-color: #FBEDC9;
+      border-bottom-left-radius: 210px;
+      border-bottom-right-radius: -200px;
+      position: fixed;
+      top: 0;
+      right: -100px;
+    }
+
+    .circ3{
+      width: 200px;
+      height: 200px;
+      background-color: #FBEDC9;
+      border-radius: 50%;
+      position: fixed;
+      top: 80px;
+      right: -50px;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <div class="circ"/>
+  <div class="circ2"/>
+  <div class="circ3"/>
+</div>
+</body>
+</html>
