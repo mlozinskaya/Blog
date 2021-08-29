@@ -14,8 +14,12 @@ import java.util.Optional;
 
 @Controller
 public class BlogController {
-    @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    public BlogController(PostRepository postRepository){
+        this.postRepository = postRepository;
+    }
 
     @GetMapping("/blog")
     public String blogMain(Model model) {
