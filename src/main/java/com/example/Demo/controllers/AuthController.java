@@ -27,10 +27,10 @@ public class AuthController {
 
     @PostMapping("/registration")
     public String addNewUser(User user, Model model){
-        User userFromDb = userRepository.findByUsername(user.getUsername());
+        User userFromDb = userRepository.findByLogin(user.getLogin());
 
         if (userFromDb != null) {
-            model.addAttribute("message", "User with this name already exists");
+            model.addAttribute("message", "User with this login already exists");
             return "auth/registration";
         } else {
             userFromDb = new User();
@@ -39,9 +39,10 @@ public class AuthController {
         userFromDb.setActive(true);
         userFromDb.setRoles(new HashSet<>(){{add(Role.GUEST);}});
         userFromDb.setUsername(user.getUsername());
+        userFromDb.setLogin(user.getLogin());
         userFromDb.setPassword(user.getPassword());
         userRepository.save(userFromDb);
 
-        return "redirect:/auth/login";
+        return "redirect:/login";
     }
 }

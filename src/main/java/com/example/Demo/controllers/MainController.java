@@ -10,4 +10,14 @@ public class MainController {
     public String home() {
         return "home";
     }
+
+    @GetMapping("/greeting")
+    public String greeting() {
+        return "auth/greeting";
+    }
+
+    @GetMapping("/mems")
+    public String mems() {
+        return "mems/mems_main";
+    }
 }
