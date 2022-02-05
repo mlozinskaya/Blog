@@ -1,51 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title th:text="${title}"/>
+  <title th:text="Main"/>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-  <style>
-    .circ{
-      width: 200px;
-      height: 100px;
-      background-color: #FBEDC9;
-      border-top-left-radius: 110px;
-      border-top-right-radius: 110px;
-      position: fixed;
-      bottom: -30px;
-      left: 40px;
-    }
-
-    .circ2{
-      width: 400px;
-      height: 200px;
-      background-color: #FBEDC9;
-      border-bottom-left-radius: 210px;
-      border-bottom-right-radius: -200px;
-      position: fixed;
-      top: 0;
-      right: -100px;
-    }
-
-    .circ3{
-      width: 200px;
-      height: 200px;
-      background-color: #FBEDC9;
-      border-radius: 50%;
-      position: fixed;
-      top: 80px;
-      right: -50px;
-      z-index: 2;
-    }
-  </style>
 </head>
 <body>
-
-<!---
-<div class="circ"> <div class="circ3"><div class="circ2"></div></div></div>
---->
-
 <header th:insert="blocks/header :: header"></header>
 
 <div>
@@ -56,7 +17,7 @@
       <div class="container mb-5">
         <a href="" onclick="window.open('https://t.me/bootafoga')"> <i class="fab fa-telegram-plane fa-3x mx-3" style="color:#b6dcb6"></i></a>
         <a href="" onclick="window.open('https://www.instagram.com/bootafoga/')"> <i class="fab fa-instagram fa-3x mx-3" style="color:#b6dcb6"></i></a>
-        <a href="" onclick="window.open('https://vk.com/mpaltry')"> <i class="fab fa-vk share fa-3x mx-3" style="color:#b6dcb6"></i></a>
+        <a href="" onclick="window.open('https://vk.com/bootafoga')"> <i class="fab fa-vk share fa-3x mx-3" style="color:#b6dcb6"></i></a>
         <a href="" onclick="window.open('https://github.com/mlozinskaya')"> <i class="fab fa-github fa-3x mx-3" style="color:#b6dcb6"></i></a>
       </div>
     </div>

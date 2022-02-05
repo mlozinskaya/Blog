@@ -1,15 +1,14 @@
 package com.example.Demo.controllers;
 
+import com.example.Demo.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class MainController {
-
-    @GetMapping("/")
-    public String home(Model model) {
-        return "home";
+public class ChatController {
+    @GetMapping("/chat")
+    public String chatMain(Model model) {
+        return "chat/chat_main";
     }
 }

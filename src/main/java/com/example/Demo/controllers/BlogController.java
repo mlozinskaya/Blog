@@ -25,12 +25,12 @@ public class BlogController {
     public String blogMain(Model model) {
         Iterable<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
-        return "blog_main";
+        return "blog/blog_main";
     }
 
     @GetMapping("/blog/add")
     public String blogAdd(Model model) {
-        return "blog_add";
+        return "blog/post_add";
     }
 
     @PostMapping("/blog/add")
@@ -50,7 +50,7 @@ public class BlogController {
         Post post = findResult.get();
         model.addAttribute("post", post);
 
-        return "post_details";
+        return "blog/post_details";
     }
 
     @GetMapping("/blog/{id}/edit")
@@ -63,7 +63,7 @@ public class BlogController {
         Post post = findResult.get();
         model.addAttribute("post", post);
 
-        return "post_edit";
+        return "blog/post_edit";
     }
 
     @PostMapping("/blog/{id}/edit")
