@@ -3,17 +3,13 @@ package com.example.Demo.controllers;
 import com.example.Demo.models.Role;
 import com.example.Demo.models.User;
 import com.example.Demo.repos.UserRepository;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class AuthController {
@@ -26,7 +22,7 @@ public class AuthController {
 
     @GetMapping("/registration")
     public String registration(){
-        return "registration";
+        return "auth/registration";
     }
 
     @PostMapping("/registration")
@@ -35,7 +31,7 @@ public class AuthController {
 
         if (userFromDb != null) {
             model.addAttribute("message", "User with this name already exists");
-            return "registration";
+            return "auth/registration";
         } else {
             userFromDb = new User();
         }
@@ -46,6 +42,6 @@ public class AuthController {
         userFromDb.setPassword(user.getPassword());
         userRepository.save(userFromDb);
 
-        return "redirect:/login";
+        return "redirect:/auth/login";
     }
 }
