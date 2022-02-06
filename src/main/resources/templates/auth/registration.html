@@ -29,6 +29,8 @@
 
             <input type="password" class="form-control mt-3" placeholder="Password" required="" name="password">
 
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
             <button class="btn btn-lg mt-4 btn-primary btn-block" type="submit">Зарегистрироваться</button>
         </div>
     </form>
