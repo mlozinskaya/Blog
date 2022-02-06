@@ -37,7 +37,11 @@ public class BlogController {
     public String blogAddPost(@RequestParam String title, @RequestParam String anons, @RequestParam String full_text, Model model) {
         Post post = new Post(title, anons, full_text);
         postRepository.save(post);
-        return "redirect:/blog";
+
+        Iterable<Post> posts = postRepository.findAll();
+        model.addAttribute("posts", posts);
+
+        return "blog/blog_main";
     }
 
     @GetMapping("/blog/{id}")
