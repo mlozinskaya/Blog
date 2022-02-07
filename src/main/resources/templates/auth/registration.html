@@ -8,7 +8,8 @@
 </head>
 
 <body>
-<header th:insert="blocks/header :: header"></header>
+<header th:insert="blocks/header :: header" class="pb-2 mb-2" style="background-image: linear-gradient(to right, #aedbe7, #81b8da);"></header>
+
 
 <div th:if="${param.error}">
     Invalid username and password.

@@ -20,4 +20,9 @@ public class MainController {
     public String mems() {
         return "mems/mems_main";
     }
+
+    @GetMapping("/debug")
+    public String debug() {
+        return "debug";
+    }
 }

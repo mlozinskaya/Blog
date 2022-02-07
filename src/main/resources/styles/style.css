@@ -1,0 +1,15 @@
+.background{
+    background-image: linear-gradient(to right, #aedbe7, #81b8da);
+}
+#banner{
+    background-image: linear-gradient(to right, #aedbe7, #81b8da);
+    color: #fff;
+    padding-top: 5%;
+}
+
+.bottom-img{
+    background-image: linear-gradient(to right, #aedbe7, #81b8da);
+    color: #fff;
+    padding-top: 5%;
+    width:100%;
+}

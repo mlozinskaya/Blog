@@ -8,7 +8,9 @@
 </head>
 
 <body>
-<header th:insert="blocks/header :: header"></header>
+<header th:insert="blocks/header :: header" class="pb-2 mb-2" style="background-image: linear-gradient(to right, #aedbe7, #81b8da);"></header>
+
+
 
 <div class="text-center">
     <form class="form-signin" th:action="@{/login}" method="post">
