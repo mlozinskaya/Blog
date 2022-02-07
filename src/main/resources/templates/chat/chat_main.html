@@ -24,7 +24,7 @@
         </form>
 
         <div th:each="el : ${messages}">
-            <h3 th:text="${el.getAuthor()}" class="mb-0"/>
+            <h3 th:text="${el.getAuthor()}" class="mt-3 mb-0"/>
             <p th:text="${el.getText()}" class="card-text mb-auto"/>
         </div>
     </div>
