@@ -1,8 +1,13 @@
 package com.example.Demo.models;
 
-import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Message {
@@ -12,14 +17,12 @@ public class Message {
 
     private String author;
     private String text;
+    private LocalDateTime creationDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
-
-    public Message(String author, String text, Date date) {
+    public Message(String author, String text) {
         this.text = text;
         this.author = author;
-        this.creationDate = date;
+        this.creationDate = LocalDateTime.now();
     }
 
     public Message() {
@@ -50,11 +53,13 @@ public class Message {
     }
 
     public String getCreationDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-        return formatter.format(this.creationDate);
+        ZonedDateTime localCreationDate = creationDate.atZone(ZoneId.of("Europe/Moscow"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
+        return localCreationDate.format(formatter);
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 }
