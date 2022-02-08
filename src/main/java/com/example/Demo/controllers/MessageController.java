@@ -37,6 +37,12 @@ public class MessageController {
             @RequestParam String text,
             Model model) {
 
+        if (text.isBlank()) {
+            Iterable<Message> messages = messageRepository.findAll();
+            model.addAttribute("messages", messages);
+            return "chat/chat_main";
+        }
+
         if (user == null) user = dbInitializer.getAnonUser();
 
         Message message = new Message(user, text);
@@ -47,4 +53,5 @@ public class MessageController {
 
         return "chat/chat_main";
     }
+
 }
