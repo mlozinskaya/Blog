@@ -1,9 +1,6 @@
 package com.example.Demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Post {
@@ -11,7 +8,11 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String title, anons, fullText;
+    private String title, anons;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String fullText;
 
     private int views;
 

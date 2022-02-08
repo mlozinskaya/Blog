@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -38,7 +41,7 @@ public class MessageController {
             @RequestParam String name,
             @RequestParam String text,
             Model model) {
-        Message message = new Message(name, text);
+        Message message = new Message(name, text, new Date());
         messageRepository.save(message);
 
         Iterable<Message> messages = messageRepository.findAll();

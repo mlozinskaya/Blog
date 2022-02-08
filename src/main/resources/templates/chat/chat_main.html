@@ -26,6 +26,7 @@
         <div th:each="el : ${messages}" class="border-start border-success border-3 px-3">
             <h3 th:text="${el.getAuthor()}" class="mt-3 mb-0"/>
             <p th:text="${el.getText()}" class="card-text mb-auto"/>
+            <p th:text="${el.getCreationDate()}" class="text-muted mt-1 small"></p>
         </div>
     </div>
 </div>
