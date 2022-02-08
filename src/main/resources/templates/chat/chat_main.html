@@ -17,14 +17,13 @@
 <div class="container mt-5">
     <div class="container px-5">
         <form method="post" th:action="@{/chat}" class="mb-5">
-            <input type="text" name="name" placeholder="Enter your name"/>
             <input type="text" name="text" placeholder="Enter your message"/>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <button type="submit">Add message</button>
         </form>
 
         <div th:each="el : ${messages}" class="border-start border-success border-3 px-3">
-            <h3 th:text="${el.getAuthor()}" class="mt-3 mb-0"/>
+            <h3 th:text="${el.getAuthor().getUsername()}" class="mt-3 mb-0"/>
             <p th:text="${el.getText()}" class="card-text mb-auto"/>
             <p th:text="${el.getCreationDate()}" class="text-muted mt-1 small"></p>
         </div>
