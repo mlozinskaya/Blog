@@ -37,16 +37,12 @@ public class MessageController {
             @RequestParam String text,
             Model model) {
 
-        if (text.isBlank()) {
-            Iterable<Message> messages = messageRepository.findAll();
-            model.addAttribute("messages", messages);
-            return "chat/chat_main";
+        if (!text.isBlank()) {
+            if (user == null) user = dbInitializer.getAnonUser();
+
+            Message message = new Message(user, text);
+            messageRepository.save(message);
         }
-
-        if (user == null) user = dbInitializer.getAnonUser();
-
-        Message message = new Message(user, text);
-        messageRepository.save(message);
 
         Iterable<Message> messages = messageRepository.findAll();
         model.addAttribute("messages", messages);
