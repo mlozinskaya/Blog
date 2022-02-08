@@ -53,10 +53,12 @@ public class Message {
     }
 
     public String getCreationDate() {
+        /*
         ZonedDateTime localCreationDate = creationDate.atZone(ZoneId.of("Europe/Moscow"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
-        return localCreationDate.format(formatter);
+        return localCreationDate.format(formatter);*/
+        return creationDate.toString();
     }
 
     public void setCreationDate(LocalDateTime creationDate) {
