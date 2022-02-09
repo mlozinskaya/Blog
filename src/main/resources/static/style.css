@@ -1,15 +1,17 @@
-.background{
+
+.background-gradient {
     background-image: linear-gradient(to right, #aedbe7, #81b8da);
 }
-#banner{
+
+#banner {
     background-image: linear-gradient(to right, #aedbe7, #81b8da);
     color: #fff;
     padding-top: 5%;
 }
 
-.bottom-img{
+.bottom-img {
     background-image: linear-gradient(to right, #aedbe7, #81b8da);
     color: #fff;
     padding-top: 5%;
-    width:100%;
+    width: 100%;
 }
