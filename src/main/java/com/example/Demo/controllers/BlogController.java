@@ -5,8 +5,10 @@ import com.example.Demo.repos.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -30,7 +32,7 @@ public class BlogController {
         return "blog/blog_main";
     }
 
-    @ModelAttribute(name = "post")
+    @ModelAttribute(name = "newPost")
     public Post newPost(){
         return new Post();
     }
@@ -41,7 +43,10 @@ public class BlogController {
     }
 
     @PostMapping("/add")
-    public String blogAddPost(Post post) {
+    public String blogAddPost(@Valid Post post,
+                              Errors errors) {
+        if (errors.hasErrors()) return "redirect:/blog";
+
         postRepository.save(post);
         return "redirect:/blog";
     }

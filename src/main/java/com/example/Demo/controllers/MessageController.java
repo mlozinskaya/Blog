@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/chat")
@@ -41,14 +44,13 @@ public class MessageController {
     @PostMapping
     public String addMessage(
             @AuthenticationPrincipal User user,
-            Message message) {
+            @Valid Message message,
+            Errors errors) {
+        if (errors.hasErrors()) return "redirect:/chat";
 
-        if (!message.getText().isBlank()) {
-            if (user == null) user = dbInitializer.getAnonUser();
-
-            message.setAuthor(user);
-            messageRepository.save(message);
-        }
+        if (user == null) user = dbInitializer.getAnonUser();
+        message.setAuthor(user);
+        messageRepository.save(message);
 
         return "redirect:/chat";
     }
