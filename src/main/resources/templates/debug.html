@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="Main"/>
+    <title th:text="Debug"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
     <link rel="stylesheet" href="/static/style.css">
@@ -10,8 +10,9 @@
 </head>
 <body>
 
-<div class="background">
+<div>
     <p>Text here</p>
+    <img th:src="@{../static/image/img.png}"/>
 </div>
 
 </body>

@@ -5,46 +5,48 @@ import com.example.Demo.repos.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/blog")
 public class BlogController {
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Autowired
     public BlogController(PostRepository postRepository){
         this.postRepository = postRepository;
     }
 
-    @GetMapping("/blog")
-    public String blogMain(Model model) {
+    @ModelAttribute
+    public void addPostsToModel(Model model){
         Iterable<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
+    }
+
+    @GetMapping
+    public String blogMain() {
         return "blog/blog_main";
     }
 
-    @GetMapping("/blog/add")
-    public String blogAdd(Model model) {
+    @ModelAttribute(name = "post")
+    public Post newPost(){
+        return new Post();
+    }
+
+    @GetMapping("/add")
+    public String blogAdd() {
         return "blog/post_add";
     }
 
-    @PostMapping("/blog/add")
-    public String blogAddPost(@RequestParam String title, @RequestParam String anons, @RequestParam String full_text, Model model) {
-        Post post = new Post(title, anons, full_text);
+    @PostMapping("/add")
+    public String blogAddPost(Post post) {
         postRepository.save(post);
-
-        Iterable<Post> posts = postRepository.findAll();
-        model.addAttribute("posts", posts);
-
-        return "blog/blog_main";
+        return "redirect:/blog";
     }
 
-    @GetMapping("/blog/{id}")
+    @GetMapping("/{id}")
     public String blogPostDetails(@PathVariable(value = "id") long id, Model model) {
         if (!postRepository.existsById(id)){
             return "redirect:/blog";
@@ -57,7 +59,7 @@ public class BlogController {
         return "blog/post_details";
     }
 
-    @GetMapping("/blog/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String blogPostEditPage(@PathVariable(value = "id") long id, Model model) {
         if (!postRepository.existsById(id)){
             return "redirect:/blog";
@@ -70,7 +72,7 @@ public class BlogController {
         return "blog/post_edit";
     }
 
-    @PostMapping("/blog/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String blogPostEdit(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String anons, @RequestParam String full_text, Model model) {
         Post post = postRepository.findById(id).orElseThrow();
         post.setTitle(title);
@@ -81,8 +83,8 @@ public class BlogController {
         return "redirect:/blog";
     }
 
-    @GetMapping("/blog/{id}/remove")
-    public String blogPostDelete(@PathVariable(value = "id") long id, Model model) {
+    @GetMapping("/{id}/remove")
+    public String blogPostDelete(@PathVariable(value = "id") long id) {
         Post post = postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
 

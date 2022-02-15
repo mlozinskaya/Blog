@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/chat")
 public class MessageController {
-    private MessageRepository messageRepository;
-    private DbInitializer dbInitializer;
+    private final MessageRepository messageRepository;
+    private final DbInitializer dbInitializer;
 
     @Autowired
     public MessageController(MessageRepository messageRepository, DbInitializer dbInitializer){
@@ -23,31 +22,34 @@ public class MessageController {
         this.dbInitializer = dbInitializer;
     }
 
-    @GetMapping("/chat")
-    public String messagesMain(Model model) {
+    @ModelAttribute
+    public void addMessagesToModel(Model model){
         Iterable<Message> messages = messageRepository.findAll();
         model.addAttribute("messages", messages);
+    }
 
+    @GetMapping
+    public String messagesMain() {
         return "chat/chat_main";
     }
 
-    @PostMapping("/chat")
+    @ModelAttribute(name = "message")
+    public Message newMessage(){
+        return new Message();
+    }
+
+    @PostMapping
     public String addMessage(
             @AuthenticationPrincipal User user,
-            @RequestParam String text,
-            Model model) {
+            Message message) {
 
-        if (!text.isBlank()) {
+        if (!message.getText().isBlank()) {
             if (user == null) user = dbInitializer.getAnonUser();
 
-            Message message = new Message(user, text);
+            message.setAuthor(user);
             messageRepository.save(message);
         }
 
-        Iterable<Message> messages = messageRepository.findAll();
-        model.addAttribute("messages", messages);
-
-        return "chat/chat_main";
+        return "redirect:/chat";
     }
-
 }
